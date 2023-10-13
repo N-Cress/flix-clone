@@ -11,7 +11,7 @@ export default function Home() {
         <Row title="Upcoming" fetchURL={Requests.requestUpcoming} />
         <Row title="Trending" fetchURL={Requests.requestTrending} />
         <Row title="Top Rated" fetchURL={Requests.requestTopRated} />
-        <Row title="Horror" fetchURL={Requests.requestHorror} />
+        <Row title="Now Playing" fetchURL={Requests.requestNow} />
     </div>
   )
 }
