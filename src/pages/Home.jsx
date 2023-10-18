@@ -7,11 +7,11 @@ export default function Home() {
   return (
     <div className='text-white'>
         <Main /> 
-        <Row title="Popular" fetchURL={Requests.requestPopular} />
-        <Row title="Upcoming" fetchURL={Requests.requestUpcoming} />
-        <Row title="Trending" fetchURL={Requests.requestTrending} />
-        <Row title="Top Rated" fetchURL={Requests.requestTopRated} />
-        <Row title="Now Playing" fetchURL={Requests.requestNow} />
+        <Row keyID="1" title="Popular" fetchURL={Requests.requestPopular} />
+        <Row keyID="2" title="Upcoming" fetchURL={Requests.requestUpcoming} />
+        <Row keyID="3" title="Top Rated" fetchURL={Requests.requestTopRated} />
+        <Row keyID="4" title="Now Playing" fetchURL={Requests.requestNow} />
+        <Row keyID="5" title="Trending" fetchURL={Requests.requestTrending} />
     </div>
   )
 }
