@@ -1,6 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react';
+import { Link, useNavigate } from "react-router-dom";
+import {UserAuth} from '../context/AuthContext';
 
 const Signup = () => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const {user, signUp} = UserAuth();
+    const navigate = useNavigate();
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        try {
+            await signUp(email, password)
+            navigate('/')
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
   return (
    <>
     <div className="w-full h-screen">
@@ -14,10 +32,20 @@ const Signup = () => {
                     <h1 className="text-3xl font-bold ">
                         Sign up 
                     </h1>
-                    <form className="w-full flex flex-col py-4">
-                        <input className="p-3 my-2 bg-gray-700 rounded" type="email" placeholder='Email' />
-                        <input className="p-3 my-2 bg-gray-700 rounded" type="password" placeholder='Password'/>
-                        <button className="bg-red-600 py-3 my-6 rounded font-bold"> Sign up </button>
+                    <form onSubmit={handleSubmit} className="w-full flex flex-col py-4">
+                        <input  className="p-3 my-2 bg-gray-700 rounded" type="name" placeholder='Name' />
+                        <input onChange={(e) => setEmail(e.target.value)} className="p-3 my-2 bg-gray-700 rounded" type="email" placeholder='Email' />
+                        <input onChange={(e) => setPassword(e.target.value)} className="p-3 my-2 bg-gray-700 rounded" type="password" placeholder='Password'/>
+                        <button className="bg-red-600 py-3 mt-4 mb-4 rounded font-bold"> Sign up </button>
+                        
+                        <p className="py-2"> 
+                            <span className="text-gray-600 pr-2">
+                                Already subscribed to Netflix?
+                            </span>
+                            <Link to="/login">
+                                Sign in
+                            </Link>
+                        </p>
                     </form>
                 </div>
             </div>
