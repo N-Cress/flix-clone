@@ -6,15 +6,23 @@ const Login = () => {
     const {user, signIn} = UserAuth();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
+        setError('');
         try {
             await signIn(email, password)
             navigate('/')
         } catch (error) {
-            console.log(error)
+            if (error.message === "Firebase: Error (auth/invalid-login-credentials).") {
+                setError("Invalid Email or Password")
+            } else  {
+                setError("Unknown Error: Please try later")
+            }
+         
         }
     }
 
@@ -31,6 +39,10 @@ const Login = () => {
                     <h1 className="text-3xl font-bold ">
                         Log in
                     </h1>
+                    {error ? <p className="p-3 bg-red-400 mt-2"> {error} </p> 
+                    :
+                    null
+                    }
                     <form className="w-full flex flex-col py-4">
                     
                         <input onChange={(e) => setEmail(e.target.value)} className="p-3 my-2 bg-gray-700 rounded" type="email" placeholder='Email' />
