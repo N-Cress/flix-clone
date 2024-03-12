@@ -1,8 +1,15 @@
-import React, { useState } from 'react'
-import { FaHeart, FaRegHeart } from 'react-icons/fa'
+import React, { useState } from 'react';
+import { FaHeart, FaRegHeart } from 'react-icons/fa';
+import { UserAuth } from '../context/AuthContext';
+import { db } from '../firebase';
+import {arrayUnion, doc, updateDoc} from 'firebase/firestore';
 
 const Movies = ( {item, key} ) => {
-    const [like, setLike] = useState(false)
+    const [like, setLike] = useState(false);
+    const [saved, setSaved] = useState(false);
+    const { user } = UserAuth();
+
+    const movieId =doc(db, 'users', `${user?.email}`)
 
   return (
     <div className='w-[160px] sm:2-[200px] md:w-[240px] lg:2-[280px] inline-block cursor-pointer relative p-2'>

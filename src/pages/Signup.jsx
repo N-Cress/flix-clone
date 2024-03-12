@@ -5,13 +5,14 @@ import {UserAuth} from '../context/AuthContext';
 const Signup = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [name, setName] = useState("");
     const {user, signUp} = UserAuth();
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            await signUp(email, password)
+            await signUp(email, password, name)
             navigate('/')
         } catch (error) {
             console.log(error)
@@ -33,7 +34,7 @@ const Signup = () => {
                         Sign up 
                     </h1>
                     <form onSubmit={handleSubmit} className="w-full flex flex-col py-4">
-                        <input  className="p-3 my-2 bg-gray-700 rounded" type="name" placeholder='Name' />
+                        <input  onChange={(e) => setName(e.target.value)} className="p-3 my-2 bg-gray-700 rounded" type="name" placeholder='Name' />
                         <input onChange={(e) => setEmail(e.target.value)} className="p-3 my-2 bg-gray-700 rounded" type="email" placeholder='Email' />
                         <input onChange={(e) => setPassword(e.target.value)} className="p-3 my-2 bg-gray-700 rounded" type="password" placeholder='Password'/>
                         <button className="bg-red-600 py-3 mt-4 mb-4 rounded font-bold"> Sign up </button>
